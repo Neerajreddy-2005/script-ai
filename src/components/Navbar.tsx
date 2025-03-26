@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -23,6 +22,12 @@ const Navbar = () => {
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    
+    // Scroll to top on page change
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, [location]);
   
   if (isDashboard) {
@@ -64,19 +69,13 @@ const Navbar = () => {
             <span className="text-xl font-bold text-scriptai-black transition-all duration-300 group-hover:text-scriptai-blue">Script<span className="text-scriptai-blue">AI</span></span>
           </Link>
           
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Only Features and Pricing */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/features" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/features' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
               Features
             </Link>
             <Link to="/pricing" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/pricing' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
               Pricing
-            </Link>
-            <Link to="/blog" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/blog' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
-              Blog
-            </Link>
-            <Link to="/help-center" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/help-center' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
-              Help Center
             </Link>
           </div>
           
@@ -117,7 +116,7 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Only Features and Pricing */}
       <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96' : 'max-h-0 overflow-hidden'}`}>
         <div className="px-4 pt-2 pb-4 space-y-4 bg-white/90 backdrop-blur-md shadow-sm">
           <Link to="/features" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
@@ -125,12 +124,6 @@ const Navbar = () => {
           </Link>
           <Link to="/pricing" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
             Pricing
-          </Link>
-          <Link to="/blog" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
-            Blog
-          </Link>
-          <Link to="/help-center" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
-            Help Center
           </Link>
           <div className="pt-2 flex flex-col space-y-3">
             <Link to="/login" className="font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">

@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -101,9 +100,9 @@ const HomePage = () => {
                   </svg>
                 </Button>
               </Link>
-              <Link to="/features">
+              <Link to="/how-it-works">
                 <Button className="btn-secondary text-base py-6 px-8 w-full sm:w-auto">
-                  Learn More
+                  How It Works
                 </Button>
               </Link>
             </div>
@@ -192,26 +191,6 @@ const HomePage = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-scriptai-blue">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Start Creating Amazing Scripts Today
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Join thousands of content creators who trust ScriptAI for their scriptwriting needs.
-          </p>
-          <Link to="/register">
-            <Button className="bg-white text-scriptai-blue hover:bg-gray-100 px-8 py-6 text-lg font-medium rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl">
-              Get Started Now 
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </Button>
-          </Link>
         </div>
       </section>
     </div>

@@ -4,7 +4,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from 'react';
 
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -22,6 +23,21 @@ import TermsOfServicePage from "./pages/TermsOfServicePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFound from "./pages/NotFound";
+import HowItWorksPage from "./pages/HowItWorksPage";
+
+// ScrollToTop component to ensure scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+};
 
 // Create a client
 const queryClient = new QueryClient();
@@ -35,6 +51,7 @@ const App: React.FC = () => {
         <BrowserRouter>
           <div className="relative min-h-screen flex flex-col">
             <CustomCursor />
+            <ScrollToTop />
             <Navbar />
             <main className="flex-grow">
               <Routes>
@@ -48,6 +65,7 @@ const App: React.FC = () => {
                 <Route path="/terms-of-service" element={<TermsOfServicePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/how-it-works" element={<HowItWorksPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
