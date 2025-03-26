@@ -40,7 +40,7 @@
 
   * {
     @apply border-border;
-    cursor: none;
+    cursor: none !important;
   }
 
   html, body, #root {

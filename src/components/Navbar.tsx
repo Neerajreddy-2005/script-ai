@@ -29,7 +29,7 @@ const Navbar = () => {
     return (
       <nav className={`
         fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out
-        ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+        ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center">
@@ -57,37 +57,37 @@ const Navbar = () => {
   return (
     <nav className={`
       fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out
-      ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+      ${isScrolled ? 'bg-white/70 backdrop-blur-lg shadow-sm' : 'bg-transparent backdrop-blur-sm'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <Link to="/" className="flex items-center">
-            <span className="text-xl font-bold text-scriptai-black">Script<span className="text-scriptai-blue">AI</span></span>
+          <Link to="/" className="flex items-center group">
+            <span className="text-xl font-bold text-scriptai-black transition-all duration-300 group-hover:text-scriptai-blue">Script<span className="text-scriptai-blue">AI</span></span>
           </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/features" className={`font-medium transition-colors ${location.pathname === '/features' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
+            <Link to="/features" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/features' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
               Features
             </Link>
-            <Link to="/how-it-works" className={`font-medium transition-colors ${location.pathname === '/how-it-works' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
-              How It Works
-            </Link>
-            <Link to="/pricing" className={`font-medium transition-colors ${location.pathname === '/pricing' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
+            <Link to="/pricing" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/pricing' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
               Pricing
             </Link>
-            <Link to="/testimonials" className={`font-medium transition-colors ${location.pathname === '/testimonials' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
-              Testimonials
+            <Link to="/blog" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/blog' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
+              Blog
+            </Link>
+            <Link to="/help-center" className={`font-medium transition-all duration-300 hover:scale-105 ${location.pathname === '/help-center' ? 'text-scriptai-blue' : 'text-scriptai-darkgray hover:text-scriptai-black'}`}>
+              Help Center
             </Link>
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/login">
-              <Button variant="ghost" className="text-scriptai-darkgray hover:text-scriptai-black">
+              <Button variant="ghost" className="text-scriptai-darkgray hover:text-scriptai-black transition-all duration-300 hover:scale-105">
                 Login
               </Button>
             </Link>
             <Link to="/register">
-              <Button className="bg-scriptai-blue hover:bg-blue-600 text-white">
+              <Button className="bg-scriptai-blue hover:bg-blue-600 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-200">
                 Get Started
               </Button>
             </Link>
@@ -119,18 +119,18 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       <div className={`md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96' : 'max-h-0 overflow-hidden'}`}>
-        <div className="px-4 pt-2 pb-4 space-y-4 bg-white/95 backdrop-blur-md shadow-sm">
+        <div className="px-4 pt-2 pb-4 space-y-4 bg-white/90 backdrop-blur-md shadow-sm">
           <Link to="/features" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
             Features
-          </Link>
-          <Link to="/how-it-works" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
-            How It Works
           </Link>
           <Link to="/pricing" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
             Pricing
           </Link>
-          <Link to="/testimonials" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
-            Testimonials
+          <Link to="/blog" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
+            Blog
+          </Link>
+          <Link to="/help-center" className="block font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">
+            Help Center
           </Link>
           <div className="pt-2 flex flex-col space-y-3">
             <Link to="/login" className="font-medium text-scriptai-darkgray hover:text-scriptai-black py-2">

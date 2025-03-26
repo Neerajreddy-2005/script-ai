@@ -73,27 +73,6 @@ const HomePage = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Content Creator",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      quote: "ScriptAI has revolutionized my content creation process. I've cut my scripting time by 75%, and the quality is consistently professional."
-    },
-    {
-      name: "Michael Chen",
-      role: "YouTube Educator",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      quote: "The platform has been a game-changer for my educational YouTube channel. The scripts are well-structured and my audience engagement has improved."
-    },
-    {
-      name: "Aisha Patel",
-      role: "Podcast Host",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      quote: "As someone who struggled with script structure, ScriptAI has been invaluable. The premium features, especially the voice output, save me so much time."
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -122,9 +101,9 @@ const HomePage = () => {
                   </svg>
                 </Button>
               </Link>
-              <Link to="/how-it-works">
+              <Link to="/features">
                 <Button className="btn-secondary text-base py-6 px-8 w-full sm:w-auto">
-                  How It Works
+                  Learn More
                 </Button>
               </Link>
             </div>
@@ -205,7 +184,7 @@ const HomePage = () => {
               <div
                 key={index}
                 ref={(el) => (featureRefs.current[index] = el)}
-                className="bg-white rounded-xl shadow-sm p-8 opacity-0 transition-all duration-500"
+                className="bg-white rounded-xl shadow-sm p-8 opacity-0 transition-all duration-500 hover:shadow-md hover:scale-105"
               >
                 <div className="mb-5">{feature.icon}</div>
                 <h3 className="text-xl font-semibold text-scriptai-black mb-3">{feature.title}</h3>
@@ -216,50 +195,14 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-scriptai-black">
-              What Our Users Say
-            </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-xl text-scriptai-darkgray">
-              Hear from content creators who have transformed their workflow with ScriptAI
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-xl shadow-sm p-8 border border-gray-100"
-              >
-                <div className="flex items-center mb-6">
-                  <img
-                    className="h-12 w-12 rounded-full"
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                  />
-                  <div className="ml-4">
-                    <h4 className="text-lg font-semibold text-scriptai-black">{testimonial.name}</h4>
-                    <p className="text-scriptai-darkgray">{testimonial.role}</p>
-                  </div>
-                </div>
-                <p className="text-scriptai-darkgray italic">"{testimonial.quote}"</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-16 bg-scriptai-blue">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Transform Your Content?
+            Start Creating Amazing Scripts Today
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Start creating professional scripts in seconds with our AI-powered scriptwriter.
+            Join thousands of content creators who trust ScriptAI for their scriptwriting needs.
           </p>
           <Link to="/register">
             <Button className="bg-white text-scriptai-blue hover:bg-gray-100 px-8 py-6 text-lg font-medium rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl">

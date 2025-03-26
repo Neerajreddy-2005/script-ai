@@ -35,8 +35,7 @@ const CustomCursor = () => {
                     !!target.closest('button') ||
                     target.classList.contains('cursor-pointer');
                     
-      // Fixed: Now properly setting a boolean value
-      setLinkHovered(isLink);
+      setLinkHovered(!!isLink);
     };
 
     const onMouseDown = () => {
