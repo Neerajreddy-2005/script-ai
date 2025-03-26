@@ -31,10 +31,11 @@ const CustomCursor = () => {
       const target = e.target as HTMLElement;
       const isLink = target.tagName.toLowerCase() === 'a' || 
                     target.tagName.toLowerCase() === 'button' ||
-                    target.closest('a') || 
-                    target.closest('button') ||
+                    !!target.closest('a') || 
+                    !!target.closest('button') ||
                     target.classList.contains('cursor-pointer');
                     
+      // Fixed: Now properly setting a boolean value
       setLinkHovered(isLink);
     };
 

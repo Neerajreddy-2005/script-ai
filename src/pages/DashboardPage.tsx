@@ -1,7 +1,13 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+
+interface GeneratedScript {
+  title: string;
+  introduction: string;
+  mainContent: string;
+  conclusion: string;
+}
 
 const DashboardPage = () => {
   const [topic, setTopic] = useState("");
@@ -9,12 +15,11 @@ const DashboardPage = () => {
   const [tone, setTone] = useState("Casual");
   const [length, setLength] = useState("Short (2-3 min)");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedScript, setGeneratedScript] = useState<string | null>(null);
+  const [generatedScript, setGeneratedScript] = useState<GeneratedScript | null>(null);
   const [selectedTab, setSelectedTab] = useState("editor");
   const [showPremiumBanner, setShowPremiumBanner] = useState(true);
   const [subscription, setSubscription] = useState("pro"); // basic, pro, premium
 
-  // Demo function to simulate script generation
   const generateScript = () => {
     if (!topic) {
       toast.error("Please enter a topic");
@@ -23,9 +28,8 @@ const DashboardPage = () => {
 
     setIsGenerating(true);
     
-    // Simulate API call delay
     setTimeout(() => {
-      const exampleScript = {
+      const exampleScript: GeneratedScript = {
         title: `${topic} - Script for ${platform}`,
         introduction: `[${tone.toUpperCase()}] Hook your audience with a strong intro Hello everyone! Today we're diving deep into ${topic}. This is something I'm really passionate about, and I can't wait to share my insights with you.`,
         mainContent: `[${tone.toUpperCase()}] Deliver your key points clearly and concisely Let's talk about the three most important aspects of ${topic}: 1. The fundamentals that everyone should know 2. Common misconceptions that might be holding you back 3. Advanced strategies that can take your understanding to the next level`,
@@ -38,7 +42,6 @@ const DashboardPage = () => {
     }, 2000);
   };
 
-  // Function to simulate thumbnail generation
   const generateThumbnail = () => {
     if (subscription === "basic") {
       toast.error("Thumbnail generation is a Pro feature");
@@ -47,19 +50,15 @@ const DashboardPage = () => {
     
     toast.success("Thumbnail generation started");
     
-    // In a real app, this would call an API
     setTimeout(() => {
       toast.success("Thumbnail generated successfully!");
     }, 1500);
   };
 
-  // List of platforms
   const platforms = ["YouTube", "TikTok", "Instagram", "Podcast", "LinkedIn", "Twitter"];
   
-  // List of tones
   const tones = ["Casual", "Professional", "Humorous", "Educational", "Persuasive", "Inspirational"];
   
-  // List of lengths
   const lengths = [
     "Short (2-3 min)",
     "Medium (5-7 min)",
@@ -70,7 +69,6 @@ const DashboardPage = () => {
   return (
     <div className="min-h-screen pt-20 pb-16 bg-scriptai-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Dashboard Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-scriptai-black">Your Script Dashboard</h1>
           <p className="text-scriptai-darkgray mt-2">
@@ -78,7 +76,6 @@ const DashboardPage = () => {
           </p>
         </div>
 
-        {/* Subscription Banner */}
         {showPremiumBanner && subscription !== "premium" && (
           <div className="bg-scriptai-lightblue border border-scriptai-blue/20 rounded-lg p-4 mb-8 relative">
             <button 
@@ -86,7 +83,7 @@ const DashboardPage = () => {
               onClick={() => setShowPremiumBanner(false)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
             <div className="flex items-start">
@@ -106,7 +103,6 @@ const DashboardPage = () => {
           </div>
         )}
 
-        {/* Demo Mode Selection */}
         <div className="bg-white rounded-lg p-4 mb-8">
           <div className="text-sm text-scriptai-darkgray mb-2">Demo Mode: Select Subscription Level</div>
           <div className="flex space-x-2">
@@ -132,7 +128,6 @@ const DashboardPage = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Input Section */}
           <div className="col-span-1 space-y-6">
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-xl font-semibold text-scriptai-black mb-6">Create Your Script</h2>
@@ -168,7 +163,7 @@ const DashboardPage = () => {
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                       <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414-1.414L10 11.414l-4.293 4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
                     </div>
                   </div>
@@ -191,7 +186,7 @@ const DashboardPage = () => {
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                       <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414-1.414L10 11.414l-4.293 4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
                     </div>
                   </div>
@@ -214,13 +209,12 @@ const DashboardPage = () => {
                     </select>
                     <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                       <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414-1.414L10 11.414l-4.293 4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
                     </div>
                   </div>
                 </div>
                 
-                {/* Premium Features */}
                 <div className={`rounded-lg p-4 ${subscription === 'premium' ? 'bg-yellow-50 border border-yellow-200' : 'bg-gray-50 border border-gray-200'}`}>
                   <div className="flex items-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" className={`mr-2 ${subscription === 'premium' ? 'text-yellow-500' : 'text-gray-400'}`}>
@@ -316,7 +310,6 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          {/* Output Section */}
           <div className="col-span-1 md:col-span-2">
             {generatedScript ? (
               <div className="bg-white rounded-lg shadow-sm p-6">
@@ -435,7 +428,6 @@ const DashboardPage = () => {
                   </div>
                 )}
 
-                {/* Thumbnail Preview (only shown for pro/premium) */}
                 {subscription !== 'basic' && (
                   <div className="mt-6">
                     <h3 className="text-lg font-medium mb-4">Generated Thumbnail</h3>
