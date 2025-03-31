@@ -1,13 +1,12 @@
 
-import React from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useEffect } from 'react';
 import { supabase } from "@/integrations/supabase/client";
-import { createContext, useState } from 'react';
+import { User, Session } from '@supabase/supabase-js';
 
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -27,8 +26,13 @@ import RegisterPage from "./pages/RegisterPage";
 import NotFound from "./pages/NotFound";
 import HowItWorksPage from "./pages/HowItWorksPage";
 
-// Create session context
-export const SessionContext = createContext({ session: null, user: null });
+// Create session context with proper typing
+interface SessionContextType {
+  session: Session | null;
+  user: User | null;
+}
+
+export const SessionContext = createContext<SessionContextType>({ session: null, user: null });
 
 // ScrollToTop component to ensure scroll to top on route change
 const ScrollToTop = () => {
@@ -44,33 +48,39 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Protected route component
-const ProtectedRoute = ({ children }) => {
+// Protected route component with proper typing
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { session } = React.useContext(SessionContext);
   
   if (!session) {
     return <Navigate to="/login" replace />;
   }
   
-  return children;
+  return <>{children}</>;
 };
 
 // Create a client
 const queryClient = new QueryClient();
 
-const App: React.FC = () => {
-  const [session, setSession] = useState(null);
-  const [user, setUser] = useState(null);
+const App = () => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+    );
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
     });
