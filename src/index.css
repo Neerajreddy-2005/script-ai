@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -39,8 +38,7 @@
   }
 
   * {
-    @apply border-border;
-    cursor: none !important;
+    @apply border-gray-200;
   }
 
   html, body, #root {
@@ -58,7 +56,7 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-white text-scriptai-black antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 
@@ -108,25 +106,18 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-scriptai-blue text-white px-6 py-3 rounded-lg font-medium 
-           transition-all duration-300 hover:shadow-lg hover:shadow-blue-200 
-           active:translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none;
+    @apply bg-scriptai-blue hover:bg-blue-600 text-white font-medium rounded-lg transition-all duration-300;
   }
   
   .btn-secondary {
-    @apply bg-white text-scriptai-blue border border-scriptai-blue/20 px-6 py-3 
-           rounded-lg font-medium transition-all duration-300 
-           hover:bg-scriptai-lightblue active:translate-y-0.5
-           disabled:opacity-50 disabled:pointer-events-none;
+    @apply bg-white hover:bg-gray-50 text-scriptai-darkgray font-medium rounded-lg border border-gray-200 transition-all duration-300;
   }
   
   .card {
-    @apply bg-white rounded-xl p-6 shadow-sm border border-gray-100;
+    @apply bg-white rounded-lg shadow-sm;
   }
   
   .input-field {
-    @apply w-full px-4 py-2 rounded-lg border border-gray-200 
-           focus:outline-none focus:ring-2 focus:ring-scriptai-blue/20 
-           focus:border-scriptai-blue/50 transition-all duration-200;
+    @apply w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-scriptai-blue/20 focus:border-scriptai-blue transition-all duration-300;
   }
 }
