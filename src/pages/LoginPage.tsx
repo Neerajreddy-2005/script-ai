@@ -1,14 +1,18 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { SessionContext } from "@/App";
+import React from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+  const { setAuthenticated } = React.useContext(SessionContext);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,9 +21,11 @@ const LoginPage = () => {
     // Simulate API call delay
     setTimeout(() => {
       if (email && password) {
+        // Automatically authenticate any user
+        setAuthenticated(true);
         toast.success("Login successful");
         // Redirect to dashboard
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       } else {
         toast.error("Please enter both email and password");
       }

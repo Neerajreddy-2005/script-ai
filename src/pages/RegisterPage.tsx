@@ -1,8 +1,9 @@
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import React from "react";
+import { SessionContext } from "@/App";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const navigate = useNavigate();
+  const { setAuthenticated } = React.useContext(SessionContext);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,9 +27,11 @@ const RegisterPage = () => {
     // Simulate API call delay
     setTimeout(() => {
       if (name && email && password) {
+        // Automatically authenticate any user
+        setAuthenticated(true);
         toast.success("Registration successful");
         // Redirect to dashboard
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       } else {
         toast.error("Please fill in all fields");
       }

@@ -1,12 +1,9 @@
-
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { User, Session } from '@supabase/supabase-js';
 
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -26,13 +23,16 @@ import RegisterPage from "./pages/RegisterPage";
 import NotFound from "./pages/NotFound";
 import HowItWorksPage from "./pages/HowItWorksPage";
 
-// Create session context with proper typing
+// Create session context
 interface SessionContextType {
-  session: Session | null;
-  user: User | null;
+  isAuthenticated: boolean;
+  setAuthenticated: (value: boolean) => void;
 }
 
-export const SessionContext = createContext<SessionContextType>({ session: null, user: null });
+export const SessionContext = createContext<SessionContextType>({
+  isAuthenticated: false,
+  setAuthenticated: () => {},
+});
 
 // ScrollToTop component to ensure scroll to top on route change
 const ScrollToTop = () => {
@@ -48,15 +48,10 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Protected route component with proper typing
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { session } = React.useContext(SessionContext);
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = React.useContext(SessionContext);
   
-  if (!session) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
   
@@ -67,29 +62,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    // Set up auth state listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-      }
-    );
-
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  const [isAuthenticated, setAuthenticated] = useState(false);
 
   return (
-    <SessionContext.Provider value={{ session, user }}>
+    <SessionContext.Provider value={{ isAuthenticated, setAuthenticated }}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
